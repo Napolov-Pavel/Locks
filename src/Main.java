@@ -1,20 +1,22 @@
 public class Main {
     private static final int NUMBER_OF_DELIVERIES = 10;
     private static final int NUMBER_OF_SELLERS = 10;
-    private static final int TIME_BETWEEN_THREADS_SELLERS = 1000;
-    private static final int TIME_BETWEEN_THREADS_DELIVERIES = 2000;
-    private static final AutoShow shop = new AutoShow();
+    private static final int TIME_BETWEEN_THREADS_SELLERS = 500;
+    private static final int TIME_BETWEEN_THREADS_DELIVERIES = 3000;
+    private final AutoShow autoShow = new AutoShow();
 
-    public static void main(String[] args){
-        new Thread(null, Main::createSellers).start();
-        new Thread(null, Main::createDeliveries).start();
+
+    public static void main(String[] args) throws InterruptedException {
+        Main main = new Main();
+        new Thread(null, main::createSellers).start();
+        Thread.sleep(2000);
+        new Thread(null, main::createDeliveries).start();
     }
 
-
-    public static void createDeliveries() {
+    public void createDeliveries() {
         for (int i = 0; i < NUMBER_OF_DELIVERIES; i++) {
             try {
-                new Thread(shop::acceptCar).start();
+                autoShow.acceptCar();
                 Thread.sleep(TIME_BETWEEN_THREADS_DELIVERIES);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -22,15 +24,14 @@ public class Main {
         }
     }
 
-    public static void createSellers() {
+    public void createSellers() {
         for (int i = 0; i < NUMBER_OF_SELLERS; i++) {
             try {
-                new Thread(null, shop::sellCar, "Покупатель " + (i + 1)).start();
+                new Thread(null, autoShow::sellCar, "Покупатель " + (i + 1)).start();
                 Thread.sleep(TIME_BETWEEN_THREADS_SELLERS);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
-
 }

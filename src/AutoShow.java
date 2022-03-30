@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutoShow {
-    Seller seller = new Seller(this);
+    private final Seller seller = new Seller(this);
     List<Car> cars = new ArrayList<>();
 
     public Car sellCar() {
