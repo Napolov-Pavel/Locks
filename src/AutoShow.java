@@ -5,8 +5,8 @@ public class AutoShow {
     private final Seller seller = new Seller(this);
     List<Car> cars = new ArrayList<>();
 
-    public Car sellCar() {
-        return seller.sellCar();
+    public void sellCar() {
+        seller.sellCar();
     }
 
     public void acceptCar() {
