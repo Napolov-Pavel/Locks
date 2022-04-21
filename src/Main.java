@@ -2,14 +2,14 @@ public class Main {
     private static final int NUMBER_OF_DELIVERIES = 10;
     private static final int NUMBER_OF_SELLERS = 10;
     private static final int TIME_BETWEEN_THREADS_SELLERS = 500;
-    private static final int TIME_BETWEEN_THREADS_DELIVERIES = 3000;
+    private static final int TIME_BETWEEN_THREADS_DELIVERIES = 1000;
     private final AutoShow autoShow = new AutoShow();
 
 
     public static void main(String[] args) throws InterruptedException {
         Main main = new Main();
         new Thread(null, main::createSellers).start();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         new Thread(null, main::createDeliveries).start();
     }
 
